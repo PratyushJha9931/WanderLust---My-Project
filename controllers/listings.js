@@ -1,4 +1,4 @@
-const Listing = require("../models/Listing");
+const Listing = require("../models/listing");
 const maptilerClient = require("@maptiler/client");
 maptilerClient.config.apiKey = process.env.MAP_TOKEN;
 
