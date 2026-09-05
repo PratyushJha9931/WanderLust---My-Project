@@ -1,14 +1,46 @@
-<footer>
-    <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-square-linkedin"></i>
+<footer class="app-footer mt-auto">
+  <div class="container py-4">
+    <div class="row align-items-center justify-content-between gy-3">
+      <!-- Left: Brand & Major Project Badge -->
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-2">
+          <i class="fa-solid fa-compass text-danger fs-4 me-2"></i>
+          <span class="fw-bold fs-5 brand-name">WanderLust</span>
+          <span class="badge bg-danger-subtle text-danger ms-2 px-2 py-1 rounded-pill">AI Edition</span>
         </div>
-        <div>&copy;WanderLust Private Limited</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
+        <p class="footer-desc mb-0">
+          Next-generation vacation rental platform powered by Gemini AI, smart catalog RAG, and MapTiler geocoding.
+        </p>
+      </div>
+
+      <!-- Center: Technology Stack Pills -->
+      <div class="col-md-4 text-md-center">
+        <div class="tech-stack-wrapper">
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express 5</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Gemini AI</span>
+          <span class="tech-tag">MapTiler</span>
         </div>
+        <div class="footer-copyright mt-2">
+          &copy; <%= new Date().getFullYear() %> WanderLust Private Limited. All rights reserved.
+        </div>
+      </div>
+
+      <!-- Right: Social Links & Policies -->
+      <div class="col-md-3 text-md-end">
+        <div class="footer-socials mb-2">
+          <a href="https://github.com" target="_blank" rel="noreferrer" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noreferrer" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <div class="footer-meta-links">
+          <a href="/listings">Explore</a> • 
+          <a href="/listings/new">Host</a> • 
+          <a href="javascript:void(0)" onclick="window.scrollTo({top:0, behavior:'smooth'})">Back to Top ↑</a>
+        </div>
+      </div>
     </div>
+  </div>
 </footer>

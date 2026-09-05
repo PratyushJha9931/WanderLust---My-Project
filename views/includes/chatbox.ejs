@@ -1,0 +1,100 @@
+<!-- WanderBot Floating AI Concierge Widget -->
+<div id="wanderbot-widget" class="wanderbot-widget">
+  <!-- Floating Action Button (FAB) -->
+  <button id="wanderbot-toggle-btn" class="wanderbot-fab" title="Chat with WanderBot AI" aria-label="Open AI Chat">
+    <div class="fab-pulse"></div>
+    <div class="fab-icon-wrapper">
+      <i class="fa-solid fa-wand-magic-sparkles fab-ai-icon"></i>
+      <i class="fa-solid fa-xmark fab-close-icon d-none"></i>
+    </div>
+    <span class="fab-badge">AI</span>
+  </button>
+
+  <!-- Chat Window Drawer -->
+  <div id="wanderbot-modal" class="wanderbot-modal d-none">
+    <!-- Header -->
+    <div class="wanderbot-header">
+      <div class="header-info">
+        <div class="bot-avatar">
+          <i class="fa-solid fa-robot"></i>
+          <span class="status-dot"></span>
+        </div>
+        <div>
+          <div class="bot-title">WanderBot <span class="ai-pill">AI Concierge</span></div>
+          <div class="bot-status">Online • Ready to assist your stay</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="wanderbot-clear-btn" class="header-btn" title="Clear conversation" aria-label="Clear chat">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button id="wanderbot-close-btn" class="header-btn" title="Minimize chat" aria-label="Close chat">
+          <i class="fa-solid fa-minus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Listing Context Bar (if viewing a listing) -->
+    <div id="wanderbot-context-bar" class="wanderbot-context-bar d-none">
+      <i class="fa-solid fa-map-pin context-pin"></i>
+      <span id="wanderbot-context-text" class="context-text">Exploring current property</span>
+    </div>
+
+    <!-- Message History Stream -->
+    <div id="wanderbot-messages" class="wanderbot-messages">
+      <!-- Bot Greeting -->
+      <div class="chat-msg bot-msg">
+        <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+        <div class="msg-bubble">
+          <p class="greeting-intro">
+            Hey there! 🌟 I'm <b>WanderBot</b>, your AI travel concierge for WanderLust.
+          </p>
+          <p class="greeting-sub">
+            I can find handpicked stays, plan day-by-day travel itineraries, check amenities, or give you local travel tips!
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Pills -->
+      <div id="wanderbot-quick-prompts" class="quick-prompts-container">
+        <span class="quick-prompts-label">Quick Ideas:</span>
+        <div class="quick-pills">
+          <button class="quick-pill" data-prompt="Show me cozy mountain cabins">🏔️ Mountain Stays</button>
+          <button class="quick-pill" data-prompt="Find stays with amazing pools">🏊 Amazing Pools</button>
+          <button class="quick-pill" data-prompt="Suggest budget stays under ₹2000">💰 Budget Stays</button>
+          <button class="quick-pill" data-prompt="Plan a 3-day travel itinerary for a scenic weekend">🗺️ 3-Day Trip Plan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing Indicator -->
+    <div id="wanderbot-typing" class="wanderbot-typing d-none">
+      <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+      <div class="typing-bubble">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Input Footer -->
+    <div class="wanderbot-footer">
+      <form id="wanderbot-form" class="chat-input-form">
+        <input 
+          type="text" 
+          id="wanderbot-input" 
+          class="chat-input" 
+          placeholder="Ask WanderBot about stays, itineraries..." 
+          autocomplete="off"
+          required
+        />
+        <button type="submit" id="wanderbot-send-btn" class="chat-send-btn" aria-label="Send Message">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </form>
+      <div class="chat-disclaimer">
+        <span>⚡ Powered by WanderLust AI • Verified Catalog Integration</span>
+      </div>
+    </div>
+  </div>
+</div>

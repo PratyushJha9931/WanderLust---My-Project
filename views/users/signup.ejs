@@ -1,25 +1,79 @@
-<%layout("/layouts/boilerplate")%>
+<% layout("/layouts/boilerplate") %>
 
-<div class="row mt-3">
-    <h1 class="col-6 offset-3">SignUp on Wanderlust</h1>
-    <div class="col-6 offset-3">
-        <form action="/signup" method="POST" class="needs-validation" novalidate>
-          <div class="mb-3">
-            <lable for="username"class="form-lable">Username</lable>
-            <input name="username" id="username" type="text" class="form-control" required>
-            <div class="valid-feedback">Looks Good!</div>
-           </div>
+<div class="row justify-content-center align-items-center py-5">
+  <div class="col-md-6 col-lg-5">
+    <div class="card auth-card border-0 shadow-lg rounded-4 p-4 p-md-5">
+      <div class="text-center mb-4">
+        <div class="auth-icon-wrapper mb-2">
+          <i class="fa-solid fa-compass text-danger display-5"></i>
+        </div>
+        <h2 class="fw-bold mb-1">Join WanderLust</h2>
+        <p class="text-muted small">Unlock AI travel planning and discover unforgettable stays</p>
+      </div>
 
-           <div class="mb-3">
-            <lable for="email"class="form-lable">Email</lable>
-            <input name="email" id="email" type="email" class="form-control" required>
-           </div>
+      <form action="/signup" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label fw-semibold">Username</label>
+          <div class="input-group">
+            <span class="input-group-text rounded-start-3"><i class="fa-solid fa-user text-muted"></i></span>
+            <input 
+              name="username" 
+              id="username" 
+              type="text" 
+              class="form-control rounded-end-3" 
+              placeholder="Choose a username" 
+              required
+            />
+          </div>
+          <div class="invalid-feedback">Please choose a username.</div>
+        </div>
 
-           <div class="mb-3">
-            <lable for="password"class="form-label">Password</lable>
-            <input name="password" id="password" type="password" class="form-control" required>
-           </div>
-           <button class="btn btn-success">SignUp</button>
-        </form>
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text rounded-start-3"><i class="fa-solid fa-envelope text-muted"></i></span>
+            <input 
+              name="email" 
+              id="email" 
+              type="email" 
+              class="form-control rounded-end-3" 
+              placeholder="name@example.com" 
+              required
+            />
+          </div>
+          <div class="invalid-feedback">Please provide a valid email.</div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <div class="input-group">
+            <span class="input-group-text rounded-start-3"><i class="fa-solid fa-lock text-muted"></i></span>
+            <input 
+              name="password" 
+              id="password" 
+              type="password" 
+              class="form-control" 
+              placeholder="Create a strong password" 
+              required
+            />
+            <button class="btn btn-outline-secondary rounded-end-3 toggle-password-btn" type="button" data-target="#password">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <div class="invalid-feedback">Please create a password.</div>
+        </div>
+
+        <div class="d-grid mb-3">
+          <button class="btn btn-danger btn-lg rounded-pill fw-bold" type="submit">
+            Create Account
+          </button>
+        </div>
+
+        <div class="text-center text-muted small">
+          Already have an account? 
+          <a href="/login" class="text-danger fw-semibold text-decoration-none ms-1">Log in here</a>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

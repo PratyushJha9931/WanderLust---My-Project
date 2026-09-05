@@ -1,68 +1,173 @@
+<% layout("/layouts/boilerplate") %>
 
-<%layout("/layouts/boilerplate")%>
-<div class="row mt-3">
-    <div class="col-8 offset-2">
-        <br><br>
-    <h3>Create a New Listing</h3>
-    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
-        <div class="mb-3">
-            <lable for="title"class="form-lable">Title</lable>
-        <input name="listing[title]" placeholder="Add a catchy Title" type="text" class="form-control" required>
-        <div class="valid-feedback">Title Looks Good!</div>
+<div class="row justify-content-center py-4">
+  <div class="col-lg-8 col-md-10">
+    <!-- Page Title -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <div>
+        <h2 class="fw-bold mb-1">Create a New Listing</h2>
+        <p class="text-muted mb-0">Share your property with millions of global travelers</p>
+      </div>
+      <a href="/listings" class="btn btn-outline-secondary rounded-pill px-3">
+        <i class="fa-solid fa-arrow-left me-1"></i> Back
+      </a>
+    </div>
+
+    <!-- ✨ AI Magic Listing Generator Box ✨ -->
+    <div class="card ai-magic-card mb-4 border-0 shadow-sm p-4 rounded-4">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="d-flex align-items-center">
+          <div class="ai-sparkle-icon me-2">
+            <i class="fa-solid fa-wand-magic-sparkles text-primary"></i>
+          </div>
+          <h5 class="fw-bold mb-0">AI Magic Listing Generator</h5>
         </div>
-        
+        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-1">Smart Auto-Fill</span>
+      </div>
+      <p class="text-muted small mb-3">
+        Got rough notes? Enter keywords (e.g. <i>"Luxury cliff villa in Goa, private infinity pool, sunset views, 3 bedrooms"</i>) and let AI write a catchy title, description, category, and suggested price!
+      </p>
+
+      <div class="input-group mb-2">
+        <input 
+          type="text" 
+          id="ai-prompt-input" 
+          class="form-control rounded-start-pill px-3" 
+          placeholder="e.g. Cozy wooden cabin in Manali, mountain view, fireplace, romantic retreat"
+        />
+        <button class="btn btn-primary rounded-end-pill px-4 fw-semibold" id="btn-ai-generate" type="button">
+          <i class="fa-solid fa-sparkles me-1"></i> Generate with AI
+        </button>
+      </div>
+      <div id="ai-gen-status" class="small text-muted d-none">
+        <i class="fa-solid fa-circle-notch fa-spin text-primary me-1"></i> Crafting luxury listing copy...
+      </div>
+    </div>
+
+    <!-- Main Creation Form -->
+    <div class="card p-4 p-md-5 rounded-4 shadow-sm border">
+      <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+        <!-- Title Input -->
         <div class="mb-3">
-            <lable for="description"class="form-lable">Description</lable>
-            <textarea name="listing[description]" class="form-control" type="text" required></textarea>
-            <div class="invalid-feedback">Please enter a description</div>
-        </div>
-        
-        <div class="mb-3">
-            <lable for="image" class="form-lable">Upload Image</lable>
-            <input name="listing[image]" type="file" class="form-control">
+          <label for="title" class="form-label fw-semibold">Title</label>
+          <input 
+            name="listing[title]" 
+            id="title" 
+            placeholder="e.g. Serene Mountain Chalet with Panoramic Views" 
+            type="text" 
+            class="form-control form-control-lg rounded-3" 
             required
-        </div>
-        
-        <div class="row">
-            <div class="mb-3 col-md-4">
-            <lable for="price"class="form-lable">Price</lable>
-            <input name="listing[price]" placeholder="enter price"  class="form-control" required>
-            <div class="invalid-feedback">Price should be valid</div>
-        </div>
-        
-        <div class="mb-3 col-md-8">
-            <lable for="country"class="form-lable">Country</lable>
-            <input name="listing[country]" placeholder="India"type="text" class="form-control" required>
-            <div class="invalid-feedback">Country is required</div>
-        </div>
-        </div>
-        
-        
-        <div class="mb-3">
-            <lable for="location"class="form-lable">Location</lable>
-            <input name="listing[location]" placeholder="Jaipur,Patna,etc.."type="text" required>
-            <div class="invalid-feedback">Please enter the location</div>
-        </div>
-        
-        <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <select name="listing[category]" id="category" class="form-select" required>
-                <option value="" disabled selected>Choose a category...</option>
-                <option value="Trending">Trending</option>
-                <option value="Rooms">Rooms</option>
-                <option value="Iconic Cities">Iconic Cities</option>
-                <option value="Mountains">Mountains</option>
-                <option value="Castles">Castles</option>
-                <option value="Amazing Pools">Amazing Pools</option>
-                <option value="Camping">Camping</option>
-                <option value="Farms">Farms</option>
-                <option value="Arctic">Arctic</option>
-            </select>
-            <div class="invalid-feedback">Please select a valid category</div>
+          />
+          <div class="valid-feedback">Catchy title!</div>
+          <div class="invalid-feedback">Please enter a property title.</div>
         </div>
 
-        <button class="btn btn-dark add-btn mt-3">Add</button>
+        <!-- Description Input -->
+        <div class="mb-3">
+          <label for="description" class="form-label fw-semibold">Description</label>
+          <textarea 
+            name="listing[description]" 
+            id="description" 
+            rows="5" 
+            class="form-control rounded-3" 
+            placeholder="Describe the atmosphere, amenities, views, and what makes your stay unique..." 
+            required
+          ></textarea>
+          <div class="invalid-feedback">Please enter a description for your listing.</div>
+        </div>
 
-    </form>
+        <!-- Image Upload & Live Preview -->
+        <div class="mb-4">
+          <label for="image" class="form-label fw-semibold">Upload Cover Image</label>
+          <input 
+            name="listing[image]" 
+            id="image" 
+            type="file" 
+            class="form-control rounded-3" 
+            accept="image/*"
+            required
+          />
+          <div class="invalid-feedback">Please select an image file for the listing.</div>
+          
+          <!-- Live Preview Container -->
+          <div id="image-preview-wrapper" class="mt-3 d-none">
+            <small class="text-muted d-block mb-1">Image Preview:</small>
+            <img id="image-preview" src="#" alt="Preview" class="rounded-3 shadow-sm" style="max-height: 220px; width: auto; object-fit: cover;" />
+          </div>
+        </div>
+
+        <!-- Price & Country Row -->
+        <div class="row g-3 mb-3">
+          <div class="col-md-5">
+            <label for="price" class="form-label fw-semibold">Price per Night (₹)</label>
+            <div class="input-group">
+              <span class="input-group-text rounded-start-3">₹</span>
+              <input 
+                name="listing[price]" 
+                id="price" 
+                placeholder="2500" 
+                type="number" 
+                min="0"
+                class="form-control rounded-end-3" 
+                required
+              />
+            </div>
+            <div class="invalid-feedback">Please enter a valid price.</div>
+          </div>
+
+          <div class="col-md-7">
+            <label for="country" class="form-label fw-semibold">Country</label>
+            <input 
+              name="listing[country]" 
+              id="country" 
+              placeholder="e.g. India, Italy, Japan" 
+              type="text" 
+              class="form-control rounded-3" 
+              required
+            />
+            <div class="invalid-feedback">Country name is required.</div>
+          </div>
+        </div>
+
+        <!-- Location City Input -->
+        <div class="mb-3">
+          <label for="location" class="form-label fw-semibold">Location / City</label>
+          <input 
+            name="listing[location]" 
+            id="location" 
+            placeholder="e.g. Jaipur, Goa, Manali, Kyoto" 
+            type="text" 
+            class="form-control rounded-3" 
+            required
+          />
+          <div class="invalid-feedback">Please enter the location city.</div>
+        </div>
+
+        <!-- Category Dropdown -->
+        <div class="mb-4">
+          <label for="category" class="form-label fw-semibold">Category</label>
+          <select name="listing[category]" id="category" class="form-select rounded-3" required>
+            <option value="" disabled selected>Select the best match category...</option>
+            <option value="Trending">Trending 🔥</option>
+            <option value="Rooms">Rooms 🛏️</option>
+            <option value="Iconic Cities">Iconic Cities 🏙️</option>
+            <option value="Mountains">Mountains 🏔️</option>
+            <option value="Castles">Castles 🏰</option>
+            <option value="Amazing Pools">Amazing Pools 🏊</option>
+            <option value="Camping">Camping ⛺</option>
+            <option value="Farms">Farms 🚜</option>
+            <option value="Arctic">Arctic ❄️</option>
+          </select>
+          <div class="invalid-feedback">Please select a valid category.</div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button class="btn btn-danger btn-lg rounded-pill fw-bold" type="submit">
+            Publish Listing
+          </button>
+        </div>
+      </form>
     </div>
-    </div>
+  </div>
+</div>

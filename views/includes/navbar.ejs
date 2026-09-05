@@ -1,49 +1,111 @@
-<style>
-  .btn-search{
-    background-color:#fe424d;
-    color:#fff;
-    border-radius:25px;
-  }
+<header class="app-header sticky-top">
+  <nav class="navbar navbar-expand-lg app-navbar">
+    <div class="container-fluid px-lg-4">
+      <!-- Brand Logo -->
+      <a class="navbar-brand brand-logo d-flex align-items-center" href="/listings">
+        <div class="brand-icon-wrapper me-2">
+          <i class="fa-solid fa-compass brand-compass"></i>
+        </div>
+        <span class="brand-name">WanderLust</span>
+        <span class="brand-ai-badge ms-2">
+          <i class="fa-solid fa-sparkles"></i> AI
+        </span>
+      </a>
 
-  .btn-search i{
-    display:inline;
-    margin-right:0.5rem;
-  }
+      <!-- Mobile Toggler -->
+      <button class="navbar-toggler modern-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainContent" aria-controls="navbarMainContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-  .search-inp{
-    border-radius:25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 1rem;
-  }
-</style>
+      <!-- Collapsible Center & Right Content -->
+      <div class="collapse navbar-collapse" id="navbarMainContent">
+        <!-- Explore Link -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link nav-pill-link active" href="/listings">
+              <i class="fa-solid fa-earth-americas me-1 text-danger"></i> Explore Stays
+            </a>
+          </li>
+        </ul>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-      </div>
+        <!-- Central Search Capsule -->
+        <div class="navbar-nav mx-auto search-nav-wrapper my-2 my-lg-0">
+          <form class="d-flex align-items-center search-capsule" role="search" method="GET" action="/listings">
+            <div class="search-input-group">
+              <i class="fa-solid fa-magnifying-glass search-leading-icon"></i>
+              <input 
+                class="form-control search-capsule-input" 
+                type="search" 
+                name="search" 
+                placeholder="Search destinations, villas, budget..." 
+                aria-label="Search"
+              />
+            </div>
+            
+            <button 
+              type="button" 
+              class="btn btn-ai-search-trigger" 
+              id="nav-ai-search-btn"
+              title="Ask WanderBot AI to find stays"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span class="d-none d-md-inline ms-1">Ask AI</span>
+            </button>
 
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search" method="GET" action="/listings">
-          <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search Destinations"/>
-          <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-        </form>
-      </div>
+            <button class="btn btn-search-submit" type="submit" aria-label="Submit Search">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
 
-      <div class="navbar-nav ms-auto">
-        <a class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold me-3 align-self-center" href="/listings/new">Wanderlust Your Home</a>
-        <% if(!currUser){ %>
-          <a class="nav-link " href="/signup"><b>Sign up</b></a>
-          <a class="nav-link" href="/login"><b>Log in</b></a>
-       <% } %> <% if(currUser){%>
-          <a class="nav-link" href="/logout"><b>Log out</b></a>
-      <% } %>
+        <!-- Right Side User Actions & Dark Mode Toggle -->
+        <div class="navbar-nav ms-auto align-items-center gap-2">
+          <!-- Host Button -->
+          <a class="btn btn-host-property d-flex align-items-center" href="/listings/new">
+            <i class="fa-solid fa-house-chimney-medical me-1"></i>
+            <span>Host with AI</span>
+          </a>
+
+          <!-- Dark / Light Mode Switcher Button -->
+          <button id="theme-toggle-btn" class="theme-toggle-btn" title="Switch Theme" aria-label="Toggle dark mode">
+            <i class="fa-solid fa-moon theme-icon-moon"></i>
+            <i class="fa-solid fa-sun theme-icon-sun d-none"></i>
+          </button>
+
+          <!-- User Menu Dropdown -->
+          <div class="dropdown user-dropdown">
+            <button class="btn user-menu-pill dropdown-toggle d-flex align-items-center" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-bars me-2"></i>
+              <div class="user-avatar-circle">
+                <% if(currUser) { %>
+                  <span class="user-initial"><%= currUser.username.charAt(0).toUpperCase() %></span>
+                <% } else { %>
+                  <i class="fa-solid fa-user"></i>
+                <% } %>
+              </div>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end modern-dropdown shadow" aria-labelledby="userMenuButton">
+              <% if(!currUser) { %>
+                <li><a class="dropdown-item fw-bold" href="/login"><i class="fa-solid fa-right-to-bracket me-2 text-danger"></i>Log In</a></li>
+                <li><a class="dropdown-item" href="/signup"><i class="fa-solid fa-user-plus me-2 text-primary"></i>Sign Up</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/listings/new"><i class="fa-solid fa-plus-circle me-2"></i>Wanderlust Your Home</a></li>
+              <% } else { %>
+                <li class="dropdown-header">
+                  <small class="text-muted">Signed in as</small>
+                  <div class="fw-bold text-truncate"><%= currUser.username %></div>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/listings/new"><i class="fa-solid fa-plus-circle me-2 text-danger"></i>Host a New Stay</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" id="trigger-wanderbot-menu"><i class="fa-solid fa-robot me-2 text-info"></i>Chat with WanderBot AI</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger fw-semibold" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log Out</a></li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>
